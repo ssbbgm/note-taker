@@ -38,7 +38,8 @@ app.post("/api/notes", function(req, res) {
   fs.readFile("./db/db.json", "utf8", function(error, response) {
       if (error) {
           console.log(error);
-      } else {
+      } 
+
         const { title, text } = req.body;
         const newNote = {
           title,
@@ -46,15 +47,14 @@ app.post("/api/notes", function(req, res) {
           note_id: uuid()
         }
         let data = JSON.parse(response);
-        data.push(newNote)
-        console.log(data)
-      }
-    
-      // fs.writeFile(path.join(__dirname, "./db/db.json"), NewNote, function(err) {
-      //     if (err) throw err;
-      // });
+        let newData = []
+        newData.push(newNote)
+
+     fs.writeFile("./db/db.json", JSON.stringify(newData), function(err) {
+          if (err) throw err;
+      });
   });
-});
+}) 
 
 
 
