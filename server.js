@@ -2,12 +2,16 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const uuid = require('short-unique-id');
+const ShortUniqueId = require('short-unique-id');
+
 
 
 //Use express middleware
 const app = express(); 
 const PORT = process.env.port || 3001;
+
+//Make unique ID
+let uuid = new ShortUniqueId({ length: 4});
 
 //How to handle data
 app.use(express.static('public'));
@@ -30,33 +34,28 @@ app.get('/api/notes', (req, res) =>
 );
 
 //Post info to the notes file
-app.post('/api/notes', (req, res) => {
-  // Log that a POST request was received
-  console.info(`${req.method} request received to add a note`);
-
-  // Destructuring assignment for the items in req.body
-  const { title, text } = req.body;
-
-  // If all the required properties are present
-  if (title && text) {
-    // Variable for the object we will save
-    const newNote = {
-      title,
-      text,
-      review_id: uuid(),
-    };
-
-    const response = {
-      status: 'success',
-      body: newNote,
-    };
-
-    console.log(response);
-    res.status(201).json(response);
-  } else {
-    res.status(500).json('Error in posting note');
-  }
+app.post("/api/notes", function(req, res) {
+  fs.readFile("./db/db.json", "utf8", function(error, response) {
+      if (error) {
+          console.log(error);
+      } else {
+        const { title, text } = req.body;
+        const newNote = {
+          title,
+          text,
+          note_id: uuid()
+        }
+        let data = JSON.parse(response);
+        data.push(newNote)
+        console.log(data)
+      }
+    
+      // fs.writeFile(path.join(__dirname, "./db/db.json"), NewNote, function(err) {
+      //     if (err) throw err;
+      // });
+  });
 });
+
 
 
 //Set up port to listen to requests
