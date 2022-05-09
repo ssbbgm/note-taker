@@ -45,9 +45,9 @@ app.post("/api/notes", function(req, res) {
         const newNote = {
           title,
           text,
-          note_id: uuid()
+          id: uuid()
         }
-        
+
         notes.push(newNote)
 
      fs.writeFile("./db/db.json", JSON.stringify(notes), function(err) {
@@ -56,6 +56,21 @@ app.post("/api/notes", function(req, res) {
       });
   });
 }) 
+
+
+//Delete Info
+app.delete('/api/notes/:id', (req, res) => {
+
+    const deleteID = req.params.id;
+  
+    fs.readFile("./db/db.json", "utf8", function(error, response) {
+      if (error) {
+          console.log(error);
+      } 
+    })
+
+
+});
 
 
 
