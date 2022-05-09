@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const ShortUniqueId = require('short-unique-id');
+const notes = require('./db/db.json')
 
 
 
@@ -46,12 +47,12 @@ app.post("/api/notes", function(req, res) {
           text,
           note_id: uuid()
         }
-        let data = JSON.parse(response);
-        let newData = []
-        newData.push(newNote)
+        
+        notes.push(newNote)
 
-     fs.writeFile("./db/db.json", JSON.stringify(newData), function(err) {
+     fs.writeFile("./db/db.json", JSON.stringify(notes), function(err) {
           if (err) throw err;
+          res.json(notes);
       });
   });
 }) 
