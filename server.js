@@ -3,8 +3,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const ShortUniqueId = require('short-unique-id');
-const notes = require('./db/db.json')
-
+const notes = require('./db/db.json');
 
 
 //Use express middleware
@@ -47,31 +46,49 @@ app.post("/api/notes", function(req, res) {
           text,
           id: uuid()
         }
-
         notes.push(newNote)
+
 
      fs.writeFile("./db/db.json", JSON.stringify(notes), function(err) {
           if (err) throw err;
           res.json(notes);
       });
   });
+  
+
 }) 
 
 
-//Delete Info
-app.delete('/api/notes/:id', (req, res) => {
+// Delete Info
 
-    const deleteID = req.params.id;
-  
-    fs.readFile("./db/db.json", "utf8", function(error, response) {
-      if (error) {
-          console.log(error);
+app.delete('/api/notes/:id', function (req, res) {
+
+  const noteQuery = req.params.id;
+  console.log(noteQuery)
+
+  fs.readFile("./db/db.json", "utf8", function(error, response) {
+      if(error){
+        console.log(error);
       } 
-    })
 
-});
+      if (noteQuery) {
+        
+        for (let i = 0; i < notes.length; i++) {
+          if (noteQuery === notes[i].id) {
+            notes.splice(i, 1)
+            return res.send(notes);
+          }
+        }
+      }
+      fs.writeFile("./db/db.json", JSON.stringify(notes), function(err) {
+        if (err) throw err;
+        res.json(notes);
+    });
 
+  })//end of readFile
 
+});//end of app.delete
+  
 
 //Set up port to listen to requests
 app.listen(PORT, () =>
