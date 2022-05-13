@@ -27,7 +27,7 @@ There are no installation instructions.
 To allow the user to write and save notes.
 
 ## Visuals
-![This is a screenshot/demo of the project.](Insert Picture or Link Info Here)
+![This is a screenshot/demo of the project.](./public/assets/NoteTakerDemo.gif)
 
 ## Tests
 
@@ -44,3 +44,7 @@ If you have any questions about this project please contact: Sherreka S. Burton
 Github: [ssbbgm](http://github.com/ssbbgm)
 
 Email: ssburto825@gmail.com
+
+## Deployment Link
+
+https://stormy-citadel-50431.herokuapp.com/
