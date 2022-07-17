@@ -5,14 +5,18 @@
 
 Please click on the badge to view license info.
    
-
 ## Description
 This assignment was to modify starter code to create an application called Note Taker that can be used to write and save notes. This application will use an Express.js back end and will save and retrieve note data from a JSON file. The application’s front end was already created. It was required to build the back end, connect the two, and then deploy the entire application to Heroku.
+
+## Deployment Link
+
+https://stormy-citadel-50431.herokuapp.com/
 
 ## Table of Contents
 
 - [License](#license)
 - [Description](#description)
+- [Deplayment Link](#deployment-link)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Visuals](#visuals)
@@ -45,6 +49,3 @@ Github: [ssbbgm](http://github.com/ssbbgm)
 
 Email: ssburto825@gmail.com
 
-## Deployment Link
-
-https://stormy-citadel-50431.herokuapp.com/
